@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0044cc;
+        }
+
+        #chat-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            min-height: 300px;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .user-message {
+            background-color: #e3f2fd;
+            margin-left: 20%;
+        }
+
+        .bot-message {
+            background-color: #f5f5f5;
+            margin-right: 20%;
+        }
+
+        #chatForm {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0044cc;
+            box-shadow: 0 0 5px rgba(0, 68, 204, 0.5);
+        }
+
+        button {
+            background-color: #0044cc;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0033aa;
+        }
+
+        @media (max-width: 500px) {
+            #chatForm {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Chatbot</h2>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <form id="chatForm">
+            <input type="text" id="query" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('chat-messages');
+
+        // Function to add message to the chat
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // On form submit, send a message to the backend
+        document.getElementById('chatForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const query = document.getElementById('query').value;
+                if (!query.trim()) return;
+
+                addMessage(query, true); 
+
+                const response = await fetch("http://127.0.0.1:8000/api/chat/",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    addMessage(data.response); 
+                } else {
+                    const errorData = await response.json();
+                    addMessage('Error: ' + errorData.detail);
+                }
+
+                document.getElementById('query').value = ''; 
+            } catch (error) {
+                console.error('Error:', error);
+                addMessage('An error occurred while sending message');
+            }
+        });
+
+        window.addEventListener('load', () => {
+            addMessage("Hello! How can I help you today?");
+        });
+    </script>
+</body>
+
+</html>
