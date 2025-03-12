@@ -3,32 +3,32 @@ AI Asset Management System is a comprehensive platform designed to manage and tr
 The system includes a robust backend, user-friendly frontend, secure environment setup, and Bluetally integration for enterprise-level asset management.
 
 ## 🌟 Features
-🔑 User authentication and secure access.
-📦 Asset inventory management with AI-based categorization.
-📊 Real-time tracking and reporting of assets.
-🔔 Notification and alert system for asset updates.
-🗄️ Database integration with alembic migrations for schema management.
-🔗 Seamless **Bluetally API integration** for secure and real-time asset storage, updates, and lifecycle management.
+-🔑 User authentication and secure access.
+-📦 Asset inventory management with AI-based categorization.
+-📊 Real-time tracking and reporting of assets.
+-🔔 Notification and alert system for asset updates.
+-🗄️ Database integration with alembic migrations for schema management.
+-🔗 Seamless **Bluetally API integration** for secure and real-time asset storage, updates, and lifecycle management.
 
 ## 🛠️ Technologies Used
-🐍 Python
-⚙️ FastAPI (likely backend)
-💻 React.js or similar (frontend)
-🗃️ PostgreSQL (assumed DB
-🔐 .env for environment configurations
-🔄 Alembic for DB migrations ☁️
+-🐍 Python
+-⚙️ FastAPI (likely backend)
+-💻 HTML, CSS, Javascript (frontend)
+-🗃️ PostgreSQL (assumed DB
+-🔐 .env for environment configurations
+-🔄 Alembic for DB migrations ☁️
 **Bluetally for SaaS-based asset management**.
 
 ## 📂 Folder Structure
-📁 `backend/` — Backend APIs and business logic.
-📁 `frontend/` — Frontend UI for user interaction.
-📁 `alembic/` — Database migrations and version control.
-📄 `.env` — Environment variables for secure config.
-📄 `alembic.ini` — Alembic configuration file.
-📄 `create_table.py` — Script to create initial database tables.
-📄 `generate_secret_key.py` — Script to generate app secret key.
-📄 `main.py` — Main application entry point.
-📄 `pyproject.toml` — Project dependencies and configuration.
+-📁 `backend/` — Backend APIs and business logic.
+-📁 `frontend/` — Frontend UI for user interaction.
+-📁 `alembic/` — Database migrations and version control.
+-📄 `.env` — Environment variables for secure config.
+-📄 `alembic.ini` — Alembic configuration file.
+-📄 `create_table.py` — Script to create initial database tables.
+-📄 `generate_secret_key.py` — Script to generate app secret key.
+-📄 `main.py` — Main application entry point.
+-📄 `pyproject.toml` — Project dependencies and configuration.
 
 ##  ⚙️ Setup Instructions
 1. ⬇️ **Clone the repository**.
